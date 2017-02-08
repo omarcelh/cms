@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Cache;
 use App\Article;
 use App\Category;
 use Illuminate\Http\Request;
@@ -18,8 +19,7 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::paginate($this->artsPerPage);
-        $categories = Category::all();
-        return view('article.index', compact('articles', 'categories'));
+        return view('article.index', compact('articles'));
     }
 
     /**
@@ -52,8 +52,7 @@ class ArticleController extends Controller
     public function show($slug)
     {
         $article = Article::where('slug', $slug)->get()->first();
-        $category = Category::findOrFail($article->category_id);
-        return view('article.show', compact('article', 'category'));
+        return view('article.show', compact('article'));
     }
 
     /**
@@ -87,6 +86,19 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Article::destroy($id);
+        Cache::flush();
+        return redirect('article');
+    }
+
+    /**
+     * View all articles
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function view()
+    {
+        $articles = Article::paginate($this->artsPerPage);
+        return view('article.view', compact('articles'));
     }
 }

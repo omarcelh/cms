@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -30,10 +31,13 @@ class PasswordController extends Controller
                 ->withInput();
         } else {
         	$currentUser = Auth::user();
-        	$currentUser->password = bcrypt($values['new-password']);
-        	$currentUser->save();
-        	return redirect('home')
-        		->with('Change password successful');
+            if(password_verify($values['password'], $currentUser->password)) {
+            	$currentUser->password = bcrypt($values['new-password']);
+            	$currentUser->save();
+                return redirect('home')->with('status', 'Change password successful');
+            } else {
+                return redirect('password')->with('error', 'Password does not match with old password');
+            }
         }
     }
 }

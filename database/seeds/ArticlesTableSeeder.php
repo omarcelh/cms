@@ -57,7 +57,7 @@ class ArticlesTableSeeder extends Seeder
 
 		Article::create([
 			'title' => 'Apple patents a vaporizer',
-			'slug' => '',
+			'slug' => 'apple-patents-a-vaporizer',
 			'source' => 'CNN',
 			'excerpt' => 'A patent filed last year and published January 26 reveals a concept for a vaporizer.',
 			'content' => 'Vaporizers are also used in industries like healthcare and agriculture, so it\'s possible Apple is thinking bigger than personal use.\r\nBut if Apple\'s future plans include making vapes for recreation, it would likely mean big corporations are getting into the weed business. Apple did not respond to a request for more information.',

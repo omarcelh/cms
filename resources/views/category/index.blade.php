@@ -39,7 +39,7 @@
                                         </a>
                                     </td>
                                     <td class="text-center">
-                                        <a data-toggle="modal" data-target="#deleteModal">
+                                        <a class="delete-category-button" data-toggle="modal" role="button" data-target="#modal-delete" data-url="{{ url('/category', $category->id) }}">
                                             <span class="glyphicon glyphicon-remove text-danger"></span>
                                         </a>
                                     </td>
@@ -58,7 +58,7 @@
             </div>
 
             <!-- Modal -->
-            <div id="deleteModal" class="modal fade" role="dialog">
+            <div id="modal-delete" class="modal fade" role="dialog">
                 <div class="modal-dialog">
                     <!-- Modal content-->
                     <div class="modal-content panel-warning">
@@ -67,11 +67,11 @@
                             <h4 class="modal-title">Are you sure?</h4>
                         </div>
                         <div class="modal-body">
-                            <p>Are you sure you want to delete <b>{{ $category->name}}</b>?</p>
+                            <p>Are you sure you want to delete this?</p>
                             <p>Once you delete this category, it cannot be restored.</p>
                         </div>
                         <div class="modal-footer">
-                            <form class="form-inline" role="form" method="POST" action="{{ url('category', [$category->id]) }}">
+                            <form id="delete-category-form" class="form-inline" role="form" method="POST" action="">
                                 {{ method_field('DELETE') }}
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -91,6 +91,12 @@
                 </div>
             </div>
             <!-- Close Modal -->
+            <!-- Script for delete modal -->
+            <script type="text/javascript">
+                $('.delete-category-button').click(function () {
+                    $('#delete-category-form').attr('action', $(this).data('url'));
+                });
+            </script>
         </div>
     </div>
 </div>

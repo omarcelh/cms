@@ -16,6 +16,7 @@
     <link href="{{ asset('/dist/summernote.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
+    <script src="/js/app.js"></script>
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
@@ -37,7 +38,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/home') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
@@ -62,6 +63,7 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        <a href="{{ url('/home') }}">Home</a>
                                         <a href="{{ url('/category') }}">Categories</a>
                                         <a href="{{ url('/article') }}">Articles</a>
                                         <a href="{{ url('/password') }}">Change Password</a>
@@ -86,7 +88,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
     <script src="{{ asset('/dist/summernote.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
-    protected $catsPerPage = 3;
+    protected $catsPerPage = 5;
     /**
      * Display a listing of the resource.
      *
@@ -111,7 +111,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
         Category::destroy($id);
         Cache::flush();
         return redirect('category');
