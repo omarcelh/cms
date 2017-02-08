@@ -60,6 +60,8 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        <a href="{{ url('/category') }}">Categories</a>
+                                        <a href="{{ url('/article') }}">Articles</a>
                                         <a href="{{ url('/password') }}">Change Password</a>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();

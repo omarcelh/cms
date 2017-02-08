@@ -10,15 +10,25 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::pattern('slug', '[a-z0-9-]+');
+
 Auth::routes();
 
-Route::pattern('slug', '[a-z0-9-]+');
-Route::pattern('id', '[0-9-]+');
-
-Route::get('/', 'ArticleController@showArticles');
-Route::get('/article/{slug}', 'ArticleController@showArticles');
-Route::get('/home', 'HomeController@index');
-Route::get('/password', 'PasswordController@showPasswordForm');
-Route::post('/password', 'PasswordController@changePassword');
+// Social Authentication
 Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
 Route::get('/callback/{provider}', 'SocialAuthController@callback');
+
+// Article
+Route::get('/', 'ArticleController@index');
+Route::resource('/article/', 'ArticleController');
+Route::get('/article/{slug?}', 'ArticleController@show');
+
+// Category
+Route::resource('/category/', 'CategoryController');
+
+// Dashboard
+Route::get('/home', 'HomeController@index');
+
+// Password
+Route::get('/password', 'PasswordController@showPasswordForm');
+Route::post('/password', 'PasswordController@changePassword');

@@ -14,5 +14,7 @@ class DatabaseSeeder extends Seeder
     	// Userroles must be before Users to prevent foreign key error
         $this->call(UserrolesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
+        $this->call(CategoriesTableSeeder::class);
+        $this->call(ArticlesTableSeeder::class);
     }
 }
