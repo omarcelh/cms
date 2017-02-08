@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="{{ asset('/dist/summernote.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -85,5 +87,13 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    <script src="{{ asset('/dist/summernote.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#summernote').summernote({
+              height:250,
+            });
+        });
+    </script>
 </body>
 </html>

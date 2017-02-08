@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
+    protected $artsPerPage = 5;
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +16,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::paginate($this->artsPerPage);
         return view('article.index', compact('articles'));
     }
 
@@ -47,10 +49,8 @@ class ArticleController extends Controller
      */
     public function show($slug)
     {
-        $articles = [];
         $article = Article::where('slug', $slug)->get()->first();
-        array_push($articles, $article);
-        return view('article.index', compact('articles'));
+        return view('article.show', compact('article'));
     }
 
     /**
