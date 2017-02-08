@@ -1,18 +1,22 @@
 @extends('layouts.app')
 
+@section('title', 'Categories')
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+            <!-- panel -->
             <div class="panel panel-default">
-                <div class="panel-heading">Category</div>
+                <div class="panel-heading">
+                    <h3>Categories</h3>({{ $categories->count() }} of {{ $categories->total() }})
+                </div>
 
                 <div class="panel-body">
                     <div class="table-responsive">          
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>ID</th>
                                     <th>Name</th>
                                     <th>Slug</th>
                                     <th>Created At</th>
@@ -22,12 +26,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                    $i = 1 
-                                ?>
                                 @foreach ($categories as $category)
                                 <tr>
-                                    <td><?= $i ?></td>
+                                    <td>{{ $category->id }}</td>
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->slug }}</td>
                                     <td>{{ $category->created_at }}</td>
@@ -43,20 +44,19 @@
                                         </a>
                                     </td>
                                 </tr>
-                                <?php 
-                                    $i++ 
-                                ?>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div class="panel-footer clearfix">
+                    {{ $categories->links() }}
                     <a href="{{ url('category/create') }}" class="pull-right btn btn-primary">
                         Add New Category
                     </a>
                 </div>
             </div>
+
             <!-- Modal -->
             <div id="deleteModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
@@ -90,6 +90,7 @@
                     </div>
                 </div>
             </div>
+            <!-- Close Modal -->
         </div>
     </div>
 </div>

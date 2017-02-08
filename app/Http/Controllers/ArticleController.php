@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Category;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -17,7 +18,8 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::paginate($this->artsPerPage);
-        return view('article.index', compact('articles'));
+        $categories = Category::all();
+        return view('article.index', compact('articles', 'categories'));
     }
 
     /**
@@ -50,7 +52,8 @@ class ArticleController extends Controller
     public function show($slug)
     {
         $article = Article::where('slug', $slug)->get()->first();
-        return view('article.show', compact('article'));
+        $category = Category::findOrFail($article->category_id);
+        return view('article.show', compact('article', 'category'));
     }
 
     /**

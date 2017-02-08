@@ -1,14 +1,15 @@
 @extends('layouts.app')
 
+@section('title', 'Article')
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default container-fluid">
-                <div class="panel-heading">
-                    <h3>Articles</h3>({{ $articles->count() }} of {{ $articles->total() }})
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix" style="vertical-align: middle;">
+                    <h3>Articles </h3>({{ $articles->count() }} of {{ $articles->total() }})
                 </div>
-                <div class="panel-body">
+                <div class="panel-body clearfix">
                 @foreach ($articles as $article)
                     <div class="row">
                         @if ($article->photo_filename)
@@ -23,12 +24,19 @@
                                 <a href="{{ url('article', $article->slug) }}">{{ $article->title }}</a>
                             </strong></h4>
                             {{ $article->excerpt }}
+                            <p><sub>Category: <strong>{{ $article->category->name }}</strong></sub></p>
                             <p><sub>Source: <strong>{{ $article->source }}</strong></sub></p>
+                            <!-- {{ $categories }} -->
                         </div>
                     </div>
-                    <hr>
+                    <br>
                 @endforeach
-                {{ $articles->links() }}
+                </div>
+                <div class="panel-footer">
+                    {{ $articles->links() }}
+                    <div class="pull-right">
+                        <a href="{{ url('article/create') }}" class="btn btn-primary">Add New Article</a>
+                    </div>
                 </div>
             </div>
         </div>
