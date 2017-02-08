@@ -45,12 +45,12 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        if($id) {
-            $article = Article::findOrFail($id);
-            return view('article.index', compact('article'));
-        } 
+        $articles = [];
+        $article = Article::where('slug', $slug)->get()->first();
+        array_push($articles, $article);
+        return view('article.index', compact('articles'));
     }
 
     /**

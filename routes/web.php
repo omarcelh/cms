@@ -18,6 +18,17 @@ Auth::routes();
 Route::get('/redirect/{provider}', 'SocialAuthController@redirect');
 Route::get('/callback/{provider}', 'SocialAuthController@callback');
 
+Route::group(
+	['namespace' => 'web'], function () {
+
+	}
+);
+
+Route::group(
+	['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth', 'admin-auth']], function () {
+	}
+);
+
 // Article
 Route::get('/', 'ArticleController@index');
 Route::resource('article', 'ArticleController');

@@ -23,7 +23,7 @@
                             </thead>
                             <tbody>
                                 <?php 
-                                    $i = 0 
+                                    $i = 1 
                                 ?>
                                 @foreach ($categories as $category)
                                 <tr>
@@ -39,7 +39,7 @@
                                     </td>
                                     <td class="text-center">
                                         <a data-toggle="modal" data-target="#deleteModal">
-                                            <span class="glyphicon glyphicon-remove"></span>
+                                            <span class="glyphicon glyphicon-remove text-danger"></span>
                                         </a>
                                     </td>
                                 </tr>
