@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Category</div>
 
@@ -33,12 +33,12 @@
                                     <td>{{ $category->created_at }}</td>
                                     <td>{{ $category->updated_at }}</td>
                                     <td class="text-center">
-                                        <a href="{{ url('category.update') }}">
+                                        <a href="{{ url('category', [$category->id]) . '/edit' }}">
                                             <span class="glyphicon glyphicon-edit"></span>
                                         </a>
                                     </td>
                                     <td class="text-center">
-                                        <a>
+                                        <a data-toggle="modal" data-target="#deleteModal">
                                             <span class="glyphicon glyphicon-remove"></span>
                                         </a>
                                     </td>
@@ -51,10 +51,43 @@
                         </table>
                     </div>
                 </div>
-                <div class="panel-footer">
+                <div class="panel-footer clearfix">
                     <a href="{{ url('category/create') }}" class="pull-right btn btn-primary">
                         Add New Category
                     </a>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div id="deleteModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content panel-warning">
+                        <div class="modal-header panel-heading">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Are you sure?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to delete <b>{{ $category->name}}</b>?</p>
+                            <p>Once you delete this category, it cannot be restored.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <form class="form-inline" role="form" method="POST" action="{{ url('category', [$category->id]) }}">
+                                {{ method_field('DELETE') }}
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-3">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

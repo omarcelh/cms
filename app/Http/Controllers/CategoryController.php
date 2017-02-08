@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use Cache;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -80,7 +81,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('category.edit', compact('category'));
     }
 
     /**
@@ -92,7 +94,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $values = $request->all();
+        $category = Category::findOrFail($id);
+        $category->name = $values['cname'];
+        $category->slug = $values['slug'];
+        $category->save();
+        return redirect('category');
     }
 
     /**
@@ -103,6 +110,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        Category::destroy($id);
+        Cache::flush();
+        return redirect('category');
     }
 }

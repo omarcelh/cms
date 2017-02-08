@@ -20,11 +20,11 @@ Route::get('/callback/{provider}', 'SocialAuthController@callback');
 
 // Article
 Route::get('/', 'ArticleController@index');
-Route::resource('/article/', 'ArticleController');
+Route::resource('article', 'ArticleController');
 Route::get('/article/{slug?}', 'ArticleController@show');
 
 // Category
-Route::resource('/category/', 'CategoryController');
+Route::resource('category', 'CategoryController');
 
 // Dashboard
 Route::get('/home', 'HomeController@index');
