@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title', 'CMS - Login')
 @section('content')
 <div class="container">
     <div class="row">
@@ -8,7 +9,6 @@
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                        <!-- {{ csrf_field() }} -->
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -61,8 +61,11 @@
                             </div>
                         </div>
                     </form>
-                    <!-- <a href="{{ url('/redirect/facebook/') }}">Facebook</a>
-                    <a href="{{ url('/redirect/google/') }}">G+</a> -->
+                    <div class="text-center">
+                        <p>or</p>
+                            <a href="{{ url('/redirect/facebook/') }}" class="btn btn-info">Login with Facebook</a>
+                            <a href="{{ url('/redirect/google/') }}" class="btn btn-danger">Login with G+</a>
+                    </div>
                 </div>
             </div>
         </div>

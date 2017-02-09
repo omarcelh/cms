@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+@section('title', 'CMS - Register')
 @section('content')
 <div class="container">
     <div class="row">
