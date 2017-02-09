@@ -11,7 +11,7 @@
                 </div>
                 <div class="panel-body clearfix">
                 @foreach ($articles as $article)
-                    <div class="row">
+                    <div class="row container-fluid">
                         @if ($article->photo_filename)
                         <div class="col-xs-4 b-image h-150" style="background-image: url({{ URL::asset($article->photo_filename) }});">
                         </div>

@@ -14,7 +14,7 @@
                     <img class="img-responsive" src="{{ URL::asset($article->photo_filename)}}">
                 @endif
                     <h4><strong>{{ $article->excerpt }}</strong></h4>
-                    <p>{{ $article->content }}</p>
+                    <p>{!! $article->content !!}</p>
                     <p><sub>Source: <strong>{{ $article->source }}</strong></sub></p>
                 </div>
             </div>

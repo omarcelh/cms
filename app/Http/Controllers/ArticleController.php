@@ -6,6 +6,7 @@ use Cache;
 use App\Article;
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class ArticleController extends Controller
 {
@@ -29,7 +30,8 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('article.create', compact('categories'));
     }
 
     /**
@@ -40,7 +42,19 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $photo_filename = $request->file('photo')->store('img', 'public');
+        $values = $request->all();
+        Article::create([
+            'title' => $values['title'],
+            'photo_filename' => $photo_filename,
+            'slug' => $values['slug'],
+            'source' => $values['source'],
+            'excerpt' => $values['excerpt'],
+            'content' => $values['content'],
+            'category_id' => $values['category-id'],
+        ]);
+
+        return redirect(url('article'))->with('status', 'Article has been added');
     }
 
     /**
@@ -63,7 +77,9 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $article = Article::findOrFail($id);
+        $categories = Category::all();
+        return view('article.edit', compact('article', 'categories'));
     }
 
     /**
@@ -75,7 +91,22 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $values = $request->all();
+        $article = Article::findOrFail($id);
+
+        if($request->file('photo') !== null) {
+            $article->photo_filename = $request->file('photo')->store('img', 'public');
+        }
+        $article->title = $values['title'];
+        $article->slug = $values['slug'];
+        $article->source = $values['source'];
+        $article->excerpt = $values['excerpt'];
+        $article->content = $values['content'];
+        $article->category_id = $values['category-id'];
+
+        $article->save();
+
+        return redirect(url('article'));        
     }
 
     /**
